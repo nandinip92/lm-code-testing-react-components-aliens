@@ -46,7 +46,12 @@ const W12MForm = () => {
         onChangeReasonForSparring={(value) => setReasonForSparring(value)}
       />
 
-      <input type="submit" title="Submit Form" onClick={submitForm} />
+      <input
+        type="submit"
+        title="Submit"
+        value="Submit Form"
+        onClick={submitForm}
+      />
     </section>
   );
 };
