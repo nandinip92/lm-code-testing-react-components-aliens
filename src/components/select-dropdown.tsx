@@ -18,7 +18,9 @@ const SelectDropDown: React.FC<SelectDropDownProps> = ({
         onChange={(event) => {
           onChangeDropDown(event.target.value);
         }}
+        defaultValue={dropDown}
       >
+        <option value="">""</option>
         <option value="4">4</option>
         <option value="Not 4">Not 4</option>
       </select>
