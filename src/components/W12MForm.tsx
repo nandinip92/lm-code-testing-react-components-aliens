@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import W12MHeader from "./W12MHeader";
 import SpeciesName from "./species-name";
 import PlanetName from "./planet-name";
@@ -12,6 +12,14 @@ const W12MForm = () => {
   const [numOfBeings, setNumOfBeings] = useState("");
   const [dropDown, setDropDown] = useState("");
   const [reasonForSparring, setReasonForSparring] = useState("");
+
+  const submitForm = () => {
+    console.log("speciesName: ", speciesName);
+    console.log("planetName: ", planetName);
+    console.log("numOfBeings: ", numOfBeings);
+    console.log("dropDown: ", dropDown);
+    console.log("reasonForSparring: ", reasonForSparring);
+  };
 
   return (
     <section className="w12MForm">
@@ -37,6 +45,8 @@ const W12MForm = () => {
         reasonForSparring={reasonForSparring}
         onChangeReasonForSparring={(value) => setReasonForSparring(value)}
       />
+
+      <input type="submit" title="Submit Form" onClick={submitForm} />
     </section>
   );
 };
