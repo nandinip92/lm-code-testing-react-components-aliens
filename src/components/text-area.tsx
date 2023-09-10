@@ -12,7 +12,7 @@ const TextArea: React.FC<TextAreaProps> = ({
   return (
     <>
       <label className="tag" htmlFor="reasonForSparring">
-        Reason For Sparring :
+        Reason For Sparring:
       </label>
       <textarea
         id="reasonForSparring"
