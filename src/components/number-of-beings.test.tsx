@@ -19,20 +19,32 @@ describe("<NumberOfBeings/>", () => {
   });
 
   it(`Given the required props,
+  If we give input fields certain values through props, do they display that value?`, () => {
+    //Arrange
+    const requiredProps: NumberOfBeingsProps = {
+      numOfBeings: "20",
+      onChangeNumOfBeings: () => {},
+    };
+    //ACT
+    render(<NumberOfBeings {...requiredProps} />);
+    const input = screen.getByLabelText<HTMLInputElement>("Number of beings:");
+
+    expect(input.value).toBe("20");
+  });
+
+  it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its onChange function and pass it the correct parameters`, () => {
     ///Arrange
     const mockOnChange = jest.fn();
     const requiredProps: NumberOfBeingsProps = {
-      numOfBeings: "20",
+      numOfBeings: "",
       onChangeNumOfBeings: mockOnChange,
     };
     const event = { target: { value: 201 } };
     //ACT
     render(<NumberOfBeings {...requiredProps} />);
     const input = screen.getByLabelText<HTMLInputElement>("Number of beings:");
-
-    expect(input.value).toBe("20");
 
     fireEvent.change(input, event);
     expect(mockOnChange).toHaveBeenCalledTimes(1);

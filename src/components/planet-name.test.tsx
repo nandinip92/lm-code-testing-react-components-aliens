@@ -19,12 +19,25 @@ describe("<PlanetName/>", () => {
   });
 
   it(`Given the required props,
+  If we give input fields certain values through props, do they display that value?`, () => {
+    //Arrange
+    const requiredProps: PlanetNameProps = {
+      planetName: "Earth",
+      onChangePlanetName: () => {},
+    };
+    //ACT
+    render(<PlanetName {...requiredProps} />);
+    const input = screen.getByLabelText<HTMLInputElement>("Planet Name:");
+    expect(input.value).toBe("Earth"); // to test input value
+  });
+
+  it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its onChange function and pass it the correct parameters`, () => {
     ///Arrange
     const mockOnChange = jest.fn();
     const requiredProps: PlanetNameProps = {
-      planetName: "Planet Ear",
+      planetName: "",
       onChangePlanetName: mockOnChange,
     };
 
@@ -32,7 +45,6 @@ describe("<PlanetName/>", () => {
     //ACT
     render(<PlanetName {...requiredProps} />);
     const input = screen.getByLabelText<HTMLInputElement>("Planet Name:");
-    expect(input.value).toBe("Planet Ear"); // to test input value
     fireEvent.change(input, event); //// triggers onChange event
 
     // tests if onChange handler is called with proper value. Also under the alias: .toBeCalledWith() - to ensure that a mock function was called with specific arguments.

@@ -17,6 +17,7 @@ const TextArea: React.FC<TextAreaProps> = ({
       <textarea
         id="reasonForSparring"
         name="reasonForSparring"
+        value={reasonForSparring}
         onChange={(event) => onChangeReasonForSparring(event?.target.value)}
       ></textarea>
     </>

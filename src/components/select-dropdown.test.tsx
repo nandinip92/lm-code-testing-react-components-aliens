@@ -20,6 +20,20 @@ describe("<SelectDropDown/>", () => {
   });
 
   it(`Given the required props,
+  If we give input fields certain values through props, do they display that value?`, () => {
+    //Arrange
+    const requiredProps: SelectDropDownProps = {
+      dropDown: "4",
+      onChangeDropDown: () => {},
+    };
+    //ACT
+    //ACT
+    render(<SelectDropDown {...requiredProps} />);
+    const input = screen.getByLabelText<HTMLInputElement>("What is 2 + 2 :");
+    expect(input.value).toBe("4");
+  });
+
+  it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its onChange function and pass it the correct parameters`, () => {
     ///Arrange
@@ -33,7 +47,6 @@ describe("<SelectDropDown/>", () => {
     //ACT
     render(<SelectDropDown {...requiredProps} />);
     const input = screen.getByLabelText<HTMLInputElement>("What is 2 + 2 :");
-    expect(input.value).toBe("");
 
     fireEvent.change(input, event1);
     expect(mockOnChange).toHaveBeenCalledTimes(1);

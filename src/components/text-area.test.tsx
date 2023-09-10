@@ -20,6 +20,21 @@ describe("<TextArea/>", () => {
   });
 
   it(`Given the required props,
+  If we give input fields certain values through props, do they display that value?`, () => {
+    //Arrange
+    const requiredProps: TextAreaProps = {
+      reasonForSparring: "Hellooo I donot like you!",
+      onChangeReasonForSparring: () => {},
+    };
+    //ACT
+    render(<TextArea {...requiredProps} />);
+    const input = screen.getByLabelText<HTMLInputElement>(
+      "Reason For Sparring:"
+    );
+    expect(input.value).toEqual("Hellooo I donot like you!");
+  });
+
+  it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its onChange function and pass it the correct parameters`, () => {
     ///Arrange
@@ -37,7 +52,6 @@ describe("<TextArea/>", () => {
     const input = screen.getByLabelText<HTMLInputElement>(
       "Reason For Sparring:"
     );
-    expect(input.value).toBe("");
 
     fireEvent.change(input, event);
     expect(mockOnChange).toHaveBeenCalledTimes(1);

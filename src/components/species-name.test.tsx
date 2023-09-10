@@ -19,6 +19,18 @@ describe("<SpeciesName/>", () => {
   });
 
   it(`Given the required props,
+  If we give input fields certain values through props, do they display that value?`, () => {
+    const requiredProps: SpeciesNameProps = {
+      speciesName: "Human",
+      onChangeSpeciesName: () => {},
+    };
+    //ACT
+    render(<SpeciesName {...requiredProps} />);
+    const input = screen.getByLabelText<HTMLInputElement>("Species Name:");
+    expect(input.value).toBe("Human"); // to test input value
+  });
+
+  it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its onChange function and pass it the correct parameters`, () => {
     ///Arrange
@@ -31,7 +43,6 @@ describe("<SpeciesName/>", () => {
     //Act
     render(<SpeciesName {...requiredProps} />);
     const input = screen.getByLabelText<HTMLInputElement>("Species Name:");
-    expect(input.value).toBe("Human"); // to test input value
 
     fireEvent.change(input, event); //// triggers onChange event
     expect(mockOnChange).toBeCalledTimes(1); //to ensure that a mock function got called exact number of times.
