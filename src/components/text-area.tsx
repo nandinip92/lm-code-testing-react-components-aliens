@@ -1,6 +1,6 @@
 import React from "react";
 
-interface TextAreaProps {
+export interface TextAreaProps {
   reasonForSparring: string;
   onChangeReasonForSparring: (newValue: string) => void;
 }
