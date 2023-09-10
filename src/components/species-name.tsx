@@ -12,7 +12,7 @@ const SpeciesName: React.FC<SpeciesNameProps> = ({
   return (
     <>
       <label className="tag" htmlFor="speciesName">
-        Species Name :
+        Species Name:
       </label>
       <input
         id="speciesName"

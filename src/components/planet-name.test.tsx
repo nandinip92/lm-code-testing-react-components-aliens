@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { fireEvent, render, screen } from "@testing-library/react";
 import PlanetName, { PlanetNameProps } from "./planet-name";
 
 describe("<PlanetName/>", () => {
@@ -16,5 +16,29 @@ describe("<PlanetName/>", () => {
 
     //Assert
     expect(input).toBeInTheDocument();
+  });
+
+  it(`Given the required props,
+  when the text is typed in the text box, 
+  input field should call its onChange function and pass it the correct parameters`, () => {
+    ///Arrange
+    const mockOnChange = jest.fn();
+    const requiredProps: PlanetNameProps = {
+      planetName: "Planet Ear",
+      onChangePlanetName: mockOnChange,
+    };
+
+    const event = { target: { value: "Planet Earth" } };
+    //ACT
+    render(<PlanetName {...requiredProps} />);
+    const input = screen.getByLabelText<HTMLInputElement>("Planet Name:");
+    expect(input.value).toBe("Planet Ear"); // to test input value
+    fireEvent.change(input, event); //// triggers onChange event
+
+    // tests if onChange handler is called with proper value. Also under the alias: .toBeCalledWith() - to ensure that a mock function was called with specific arguments.
+    expect(mockOnChange).toHaveBeenCalledWith("Planet Earth");
+
+    //to ensure that a mock function got called exact number of times. Also under the alias: .toBeCalledTimes(number)
+    expect(mockOnChange).toHaveBeenCalledTimes(1);
   });
 });
