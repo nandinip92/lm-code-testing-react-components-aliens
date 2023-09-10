@@ -1,6 +1,6 @@
 import React from "react";
 
-interface SpeciesNameProps {
+export interface SpeciesNameProps {
   speciesName: string;
   onChangeSpeciesName: (newValue: string) => void;
 }

@@ -1,6 +1,6 @@
 import React from "react";
 
-interface PlanetNameProps {
+export interface PlanetNameProps {
   planetName: string;
   onChangePlanetName: (newValue: string) => void;
 }

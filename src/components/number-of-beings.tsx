@@ -1,6 +1,6 @@
 import React from "react";
 
-interface NumberOfBeingsProps {
+export interface NumberOfBeingsProps {
   numOfBeings: string;
   onChangeNumOfBeings: (newValue: string) => void;
 }
@@ -12,7 +12,7 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({
   return (
     <>
       <label className="tag" htmlFor="numberOfBeings">
-        Number of beings :
+        Number of beings:
       </label>
       <input
         id="numberOfBeings"
