@@ -1,7 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import NumberOfBeings, { NumberOfBeingsProps } from "./number-of-beings";
 
-describe("<SpeciesName/>", () => {
+describe("<NumberOfBeings/>", () => {
   it(`Given the required props, 
     when the component is rendered, 
     then Number of species label must be present`, () => {
