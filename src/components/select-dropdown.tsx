@@ -1,4 +1,4 @@
-interface SelectDropDownProps {
+export interface SelectDropDownProps {
   dropDown: string;
   onChangeDropDown: (newValue: string) => void;
 }
