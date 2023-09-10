@@ -23,7 +23,6 @@ describe("<NumberOfBeings/>", () => {
   input field should call its onChange function and pass it the correct parameters`, () => {
     ///Arrange
     const mockOnChange = jest.fn();
-    //Arrange
     const requiredProps: NumberOfBeingsProps = {
       numOfBeings: "20",
       onChangeNumOfBeings: mockOnChange,
