@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import W12MHeader from "./W12MHeader";
 // import TextInput from "./text-input";
 import SelectDropDown from "./select-dropdown";
@@ -12,6 +12,7 @@ import { validateSpeciesName } from "./validate/validate_species_name";
 import { validatePlanetName } from "./validate/validate_planet_name";
 import { validateNumOfBeings } from "./validate/validate_number_of_beings";
 import { validateSelectDropDown } from "./validate/validate_select_dropdown";
+import { validateReasonForSparring } from "./validate/validate_text_area";
 
 const W12MForm = () => {
   const [speciesName, setSpeciesName] = useState("");
@@ -58,6 +59,7 @@ const W12MForm = () => {
       <TextArea
         reasonForSparring={reasonForSparring}
         onChangeReasonForSparring={(value) => setReasonForSparring(value)}
+        validate={validateReasonForSparring}
       />
 
       <input

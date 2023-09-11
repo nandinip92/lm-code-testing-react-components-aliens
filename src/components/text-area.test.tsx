@@ -10,6 +10,7 @@ describe("<TextArea/>", () => {
     const requiredProps: TextAreaProps = {
       reasonForSparring: "Hellooo I donot like you!",
       onChangeReasonForSparring: () => {},
+      validate: () => [],
     };
     //ACT
     render(<TextArea {...requiredProps} />);
@@ -25,6 +26,7 @@ describe("<TextArea/>", () => {
     const requiredProps: TextAreaProps = {
       reasonForSparring: "Hellooo I donot like you!",
       onChangeReasonForSparring: () => {},
+      validate: () => [],
     };
     //ACT
     render(<TextArea {...requiredProps} />);
@@ -42,6 +44,7 @@ describe("<TextArea/>", () => {
     const requiredProps: TextAreaProps = {
       reasonForSparring: "",
       onChangeReasonForSparring: mockOnChange,
+      validate: () => [],
     };
 
     const event = {
