@@ -10,9 +10,9 @@ export const validateSpeciesName: (speciesName: string) => string[] = (
   const isOnlyAplphabets = /^[A-Za-z]*$/.test(speciesName);
   isOnlyAplphabets
     ? (length = speciesName.length)
-    : errors.push("No numbers or special charecters allowed!");
+    : errors.push("No numbers or special characters allowed!");
 
-  if (!(length > 3 && length < 23)) {
+  if (!(length > 3 && length < 23) && isOnlyAplphabets) {
     errors.push("Characters length must be between 3 and 23");
   }
   return errors;
