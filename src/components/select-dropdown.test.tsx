@@ -10,6 +10,7 @@ describe("<SelectDropDown/>", () => {
     const requiredProps: SelectDropDownProps = {
       dropDown: "",
       onChangeDropDown: () => {},
+      validate: () => [],
     };
     //ACT
     render(<SelectDropDown {...requiredProps} />);
@@ -25,6 +26,7 @@ describe("<SelectDropDown/>", () => {
     const requiredProps: SelectDropDownProps = {
       dropDown: "4",
       onChangeDropDown: () => {},
+      validate: () => [],
     };
     //ACT
     //ACT
@@ -41,6 +43,7 @@ describe("<SelectDropDown/>", () => {
     const requiredProps: SelectDropDownProps = {
       dropDown: "",
       onChangeDropDown: mockOnChange,
+      validate: () => [],
     };
     const event1 = { target: { value: "4" } };
     const event2 = { target: { value: "Not 4" } };

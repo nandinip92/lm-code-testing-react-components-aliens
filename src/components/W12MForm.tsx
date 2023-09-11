@@ -11,6 +11,7 @@ import NumberOfBeings from "./number-of-beings";
 import { validateSpeciesName } from "./validate/validate_species_name";
 import { validatePlanetName } from "./validate/validate_planet_name";
 import { validateNumOfBeings } from "./validate/validate_number_of_beings";
+import { validateSelectDropDown } from "./validate/validate_select_dropdown";
 
 const W12MForm = () => {
   const [speciesName, setSpeciesName] = useState("");
@@ -51,6 +52,7 @@ const W12MForm = () => {
       <SelectDropDown
         dropDown={dropDown}
         onChangeDropDown={(value) => setDropDown(value)}
+        validate={validateSelectDropDown}
       />
       <br></br>
       <TextArea
