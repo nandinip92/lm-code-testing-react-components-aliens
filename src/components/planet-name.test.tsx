@@ -9,6 +9,7 @@ describe("<PlanetName/>", () => {
     const requiredProps: PlanetNameProps = {
       planetName: "Earth",
       onChangePlanetName: () => {},
+      validate: () => [],
     };
     //ACT
     render(<PlanetName {...requiredProps} />);
@@ -24,6 +25,7 @@ describe("<PlanetName/>", () => {
     const requiredProps: PlanetNameProps = {
       planetName: "Earth",
       onChangePlanetName: () => {},
+      validate: () => [],
     };
     //ACT
     render(<PlanetName {...requiredProps} />);
@@ -39,6 +41,7 @@ describe("<PlanetName/>", () => {
     const requiredProps: PlanetNameProps = {
       planetName: "",
       onChangePlanetName: mockOnChange,
+      validate: () => [],
     };
 
     const event = { target: { value: "Planet Earth" } };
