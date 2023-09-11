@@ -1,10 +1,14 @@
 import { useEffect, useState } from "react";
 import W12MHeader from "./W12MHeader";
+// import TextInput from "./text-input";
+import SelectDropDown from "./select-dropdown";
+import TextArea from "./text-area";
+
 import SpeciesName from "./species-name";
 import PlanetName from "./planet-name";
 import NumberOfBeings from "./number-of-beings";
-import SelectDropDown from "./select-dropdown";
-import TextArea from "./text-area";
+
+import { validateSpeciesName } from "./validate/validate_species_name";
 
 const W12MForm = () => {
   const [speciesName, setSpeciesName] = useState("");
@@ -27,6 +31,7 @@ const W12MForm = () => {
       <SpeciesName
         speciesName={speciesName}
         onChangeSpeciesName={(value) => setSpeciesName(value)}
+        validate={validateSpeciesName}
       />
       <br></br>
       <PlanetName planetName={planetName} onChangePlanetName={setPlanetName} />

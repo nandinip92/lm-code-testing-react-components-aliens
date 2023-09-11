@@ -9,6 +9,7 @@ describe("<SpeciesName/>", () => {
     const requiredProps: SpeciesNameProps = {
       speciesName: "Human",
       onChangeSpeciesName: () => {},
+      validate: () => [],
     };
     //ACT
     render(<SpeciesName {...requiredProps} />);
@@ -23,6 +24,7 @@ describe("<SpeciesName/>", () => {
     const requiredProps: SpeciesNameProps = {
       speciesName: "Human",
       onChangeSpeciesName: () => {},
+      validate: () => [],
     };
     //ACT
     render(<SpeciesName {...requiredProps} />);
@@ -38,6 +40,7 @@ describe("<SpeciesName/>", () => {
     const requiredProps: SpeciesNameProps = {
       speciesName: "Human",
       onChangeSpeciesName: mockOnChange,
+      validate: () => [],
     };
     const event = { target: { value: "HumanBeings" } };
     //Act
