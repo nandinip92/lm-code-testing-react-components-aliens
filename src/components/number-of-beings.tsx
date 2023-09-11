@@ -1,14 +1,17 @@
 import React from "react";
-
+import ErrorMessage from "./error-messages";
 export interface NumberOfBeingsProps {
   numOfBeings: string;
   onChangeNumOfBeings: (newValue: string) => void;
+  validate: (newValue: string) => string[];
 }
 
 const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({
   numOfBeings,
   onChangeNumOfBeings,
+  validate,
 }) => {
+  const errorMessages = validate(numOfBeings);
   return (
     <>
       <label className="tag" htmlFor="numberOfBeings">
@@ -20,6 +23,7 @@ const NumberOfBeings: React.FC<NumberOfBeingsProps> = ({
         value={numOfBeings}
         onChange={(event) => onChangeNumOfBeings(event.target.value)}
       />
+      <ErrorMessage messages={errorMessages} />
     </>
   );
 };

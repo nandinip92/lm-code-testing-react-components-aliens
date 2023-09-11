@@ -10,6 +10,7 @@ import NumberOfBeings from "./number-of-beings";
 
 import { validateSpeciesName } from "./validate/validate_species_name";
 import { validatePlanetName } from "./validate/validate_planet_name";
+import { validateNumOfBeings } from "./validate/validate_number_of_beings";
 
 const W12MForm = () => {
   const [speciesName, setSpeciesName] = useState("");
@@ -44,6 +45,7 @@ const W12MForm = () => {
       <NumberOfBeings
         numOfBeings={numOfBeings}
         onChangeNumOfBeings={(value) => setNumOfBeings(value)}
+        validate={validateNumOfBeings}
       />
       <br></br>
       <SelectDropDown

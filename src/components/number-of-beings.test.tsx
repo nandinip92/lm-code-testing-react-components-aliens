@@ -9,6 +9,7 @@ describe("<NumberOfBeings/>", () => {
     const requiredProps: NumberOfBeingsProps = {
       numOfBeings: "20",
       onChangeNumOfBeings: () => {},
+      validate: () => [],
     };
     //ACT
     render(<NumberOfBeings {...requiredProps} />);
@@ -24,6 +25,7 @@ describe("<NumberOfBeings/>", () => {
     const requiredProps: NumberOfBeingsProps = {
       numOfBeings: "20",
       onChangeNumOfBeings: () => {},
+      validate: () => [],
     };
     //ACT
     render(<NumberOfBeings {...requiredProps} />);
@@ -40,6 +42,7 @@ describe("<NumberOfBeings/>", () => {
     const requiredProps: NumberOfBeingsProps = {
       numOfBeings: "",
       onChangeNumOfBeings: mockOnChange,
+      validate: () => [],
     };
     const event = { target: { value: 201 } };
     //ACT
