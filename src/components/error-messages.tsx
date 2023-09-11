@@ -1,4 +1,5 @@
 import React from "react";
+import { v4 as uuidv4 } from "uuid";
 
 export interface ErrorMessagesProps {
   messages: Array<string>;
@@ -8,7 +9,9 @@ const ErrorMessage: React.FC<ErrorMessagesProps> = ({ messages }) => {
   return (
     <>
       {messages.map((message) => (
-        <p className="error">{message}</p>
+        <p key={uuidv4()} className="error">
+          {message}
+        </p>
       ))}
     </>
   );
