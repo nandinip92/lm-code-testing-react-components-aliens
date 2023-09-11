@@ -1,4 +1,4 @@
-export const validateReasonForSparring: (
+export const validateReasonForSparringTextArea: (
   reasonForSparring: string
 ) => string[] = (reasonForSparring) => {
   const errors = [];

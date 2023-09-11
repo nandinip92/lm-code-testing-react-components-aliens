@@ -1,18 +1,18 @@
 import { useState } from "react";
 import W12MHeader from "./W12MHeader";
-// import TextInput from "./text-input";
+import TextInput from "./text-input";
 import SelectDropDown from "./select-dropdown";
 import TextArea from "./text-area";
 
-import SpeciesName from "./species-name";
-import PlanetName from "./planet-name";
-import NumberOfBeings from "./number-of-beings";
+// import SpeciesName from "./species-name";
+// import PlanetName from "./planet-name";
+// import NumberOfBeings from "./number-of-beings";
 
 import { validateSpeciesName } from "./validate/validate_species_name";
 import { validatePlanetName } from "./validate/validate_planet_name";
 import { validateNumOfBeings } from "./validate/validate_number_of_beings";
 import { validateSelectDropDown } from "./validate/validate_select_dropdown";
-import { validateReasonForSparring } from "./validate/validate_text_area";
+import { validateReasonForSparringTextArea } from "./validate/validate_text_area";
 
 const W12MForm = () => {
   const [speciesName, setSpeciesName] = useState("");
@@ -32,7 +32,7 @@ const W12MForm = () => {
   return (
     <section className="w12MForm">
       <W12MHeader />
-      <SpeciesName
+      {/* <SpeciesName
         speciesName={speciesName}
         onChangeSpeciesName={(value) => setSpeciesName(value)}
         validate={validateSpeciesName}
@@ -48,6 +48,24 @@ const W12MForm = () => {
         numOfBeings={numOfBeings}
         onChangeNumOfBeings={(value) => setNumOfBeings(value)}
         validate={validateNumOfBeings}
+      /> */}
+      <TextInput
+        fieldId="speciesName"
+        fieldValue={speciesName}
+        onChangeFieldValue={setSpeciesName}
+        validate={validateSpeciesName}
+      />
+      <TextInput
+        fieldId="planetName"
+        fieldValue={planetName}
+        onChangeFieldValue={(value) => setPlanetName(value)}
+        validate={validatePlanetName}
+      />
+      <TextInput
+        fieldId="numOfBeings"
+        fieldValue={numOfBeings}
+        onChangeFieldValue={(value) => setNumOfBeings(value)}
+        validate={validateNumOfBeings}
       />
       <br></br>
       <SelectDropDown
@@ -59,7 +77,7 @@ const W12MForm = () => {
       <TextArea
         reasonForSparring={reasonForSparring}
         onChangeReasonForSparring={(value) => setReasonForSparring(value)}
-        validate={validateReasonForSparring}
+        validate={validateReasonForSparringTextArea}
       />
 
       <input
