@@ -12,7 +12,7 @@ export const validateNumOfBeings: (numOfBeings: string) => string[] = (
     : errors.push("ONLY Numbers!");
 
   //1,000,000,000
-  if (numberOfBeings < 1000000000) {
+  if (numberOfBeings < 1000000000 && isOnlyNumbers) {
     errors.push("numberOfBeings must be atleast 1,000,000,000");
   }
   return errors;
