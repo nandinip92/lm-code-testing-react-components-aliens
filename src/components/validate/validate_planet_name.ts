@@ -6,8 +6,8 @@ export const validatePlanetName: (planetName: string) => string[] = (
   // or an empty array if there aren't any
   let errors = [];
   let length = 0;
-  const isOnlyAplphabets = /^[A-Za-z0-9]*$/.test(planetName);
-  isOnlyAplphabets
+  const isOnlyAplphabetsAndNumbers = /^[A-Za-z0-9]*$/.test(planetName);
+  isOnlyAplphabetsAndNumbers
     ? (length = planetName.length)
     : errors.push("Numbers are allowed, but no special characters!");
 
