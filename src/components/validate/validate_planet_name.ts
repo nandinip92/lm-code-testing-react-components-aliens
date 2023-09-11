@@ -11,7 +11,7 @@ export const validatePlanetName: (planetName: string) => string[] = (
     ? (length = planetName.length)
     : errors.push("Numbers are allowed, but no special characters!");
 
-  if (!(length > 2 && length < 49)) {
+  if (!(length > 2 && length < 49) && isOnlyAplphabetsAndNumbers) {
     errors.push("Characters length must be between 2 and 49");
   }
   return errors;
