@@ -1,11 +1,11 @@
 import React from "react";
 import { v4 as uuidv4 } from "uuid";
 
-export interface ErrorMessagesProps {
-  messages: Array<string>;
-}
+// export interface ErrorMessagesProps {
+//   messages: Array<string>;
+// }
 
-const ErrorMessage: React.FC<ErrorMessagesProps> = ({ messages }) => {
+const ErrorMessage: React.FC<{ messages: Array<string> }> = ({ messages }) => {
   return (
     <>
       {messages.map((message) => (
