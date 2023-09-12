@@ -66,7 +66,7 @@ describe("<PlanetName/>", () => {
   };
   it(`Given the required props,
   when the text is typed in the text box, 
-  input field should call its 'validate' function to return empty [] when Species name is Valid`, () => {
+  input field should call its 'validate' function to return empty [] when Planet name is Valid`, () => {
     //Act
     mockValidatePlanetName.mockReturnValue([]);
 
