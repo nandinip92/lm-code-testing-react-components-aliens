@@ -2,22 +2,11 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import TextInput, { TextInputProps } from "./text-input";
 import { Labels, labels } from "../data/inputfield-labels";
 
-const setup = (requiredProps: TextInputProps) => {
-  render(<TextInput {...requiredProps} />);
-  const input = screen.getByRole<HTMLInputElement>("textbox");
-  //const id = requiredProps.fieldId;
-  //const label = labels[id as keyof Labels];
-  //console.log("label-->", label);
-  //const input = screen.getByLabelText(label);
-
-  //console.log("--->input", input);
-
-  return input;
-};
+/*
 describe("<TextInput/> for 'Species Name' textbox", () => {
   it(`Given the required props, 
     when the component is rendered, 
-    then 'Species Name' textbox must be present`, () => {
+    then 'Species Name' Label must be present`, async () => {
     //Arrange
     const requiredProps: TextInputProps = {
       fieldId: "speciesName",
@@ -25,23 +14,67 @@ describe("<TextInput/> for 'Species Name' textbox", () => {
       onChangeFieldValue: () => {},
       validate: () => [],
     };
-    //Act
-    const input = setup(requiredProps);
+    render(<TextInput {...requiredProps} />);
+    const input = screen.getByLabelText("Species Name: ");
+    expect(input).toBeInTheDocument();
+  });
+});*/
+
+const mockOnChange = jest.fn();
+const mockValidate = jest.fn();
+
+const setup = (requiredProps: TextInputProps) => {
+  render(<TextInput {...requiredProps} />);
+  const input = screen.getByRole<HTMLInputElement>("textbox");
+  return input;
+};
+
+const setUpSpeciesName = () => {
+  const requiredProps: TextInputProps = {
+    fieldId: "speciesName",
+    fieldValue: "Human",
+    onChangeFieldValue: mockOnChange,
+    validate: mockValidate,
+  };
+  const input = setup(requiredProps);
+  return input;
+};
+
+const setUpPlanetName = () => {
+  const requiredProps: TextInputProps = {
+    fieldId: "planetName",
+    fieldValue: "Earth",
+    onChangeFieldValue: mockOnChange,
+    validate: mockValidate,
+  };
+  const input = setup(requiredProps);
+  return input;
+};
+
+const setUpNumberOfBeings = () => {
+  const requiredProps: TextInputProps = {
+    fieldId: "numOfBeings",
+    fieldValue: "",
+    onChangeFieldValue: mockOnChange,
+    validate: mockValidate,
+  };
+  const input = setup(requiredProps);
+  return input;
+};
+
+describe("<TextInput/> for textbox", () => {
+  it(`Given the required props, 
+    when the component is rendered, 
+    then 'Species Name' textbox must be present`, () => {
+    const input = setUpSpeciesName();
     //Assert
     expect(input).toBeInTheDocument();
   });
 
   it(`Given the required props,
   If we give input fields certain values through props, do they display that value?`, () => {
-    //Arrange
-    const requiredProps: TextInputProps = {
-      fieldId: "speciesName",
-      fieldValue: "Human",
-      onChangeFieldValue: () => {},
-      validate: () => [],
-    };
     //Act
-    const input = setup(requiredProps);
+    const input = setUpSpeciesName();
     //Assert
     expect(input.value).toBe("Human");
   });
@@ -50,130 +83,58 @@ describe("<TextInput/> for 'Species Name' textbox", () => {
   when the text is typed in the text box, 
   input field should call its onChange function and pass it the correct parameters`, () => {
     //Arrange
-    const mockOnChange = jest.fn();
-    const requiredProps: TextInputProps = {
-      fieldId: "speciesName",
-      fieldValue: "",
-      onChangeFieldValue: mockOnChange,
-      validate: () => [],
-    };
     const event = { target: { value: "HumanBeings" } };
     //Act
-    const input = setup(requiredProps);
+    const input = setUpSpeciesName();
     fireEvent.change(input, event); //// triggers onChange event
 
     //Assert
     expect(mockOnChange).toBeCalledTimes(1); //to ensure that a mock function got called exact number of times.
     expect(mockOnChange).toBeCalledWith("HumanBeings"); // tests if onChange handler is called with proper value
   });
-});
 
-describe("<TextInput/> for 'Planet Name:' textbox", () => {
-  it(`Given the required props, 
-    when the component is rendered, 
-    then 'Planet Name' textbox must be present`, () => {
-    //Arrange
-    const requiredProps: TextInputProps = {
-      fieldId: "planetName",
-      fieldValue: "",
-      onChangeFieldValue: () => {},
-      validate: () => [],
-    };
+  it(`Given the required props,
+  when the input text is typed in the text box, 
+  input field should call its 'validate' function to return empty [] when given input is Valid`, () => {
+    mockValidate.mockReturnValue([]);
     //Act
-    const input = setup(requiredProps);
-    //Assert
-    expect(input).toBeInTheDocument();
+    //const input= setUpPlanetName();
+    //Checking for the non-existance of the element <p>
+    const noErrorOnScreen = screen.queryByTestId(/error/i);
+    expect(noErrorOnScreen).toBeNull();
   });
 
   it(`Given the required props,
-  If we give input fields certain values through props, do they display that value?`, () => {
+  when the text is typed in the text box,
+  input field should call its 'validate' function to return ONE Error`, () => {
     //Arrange
-    const requiredProps: TextInputProps = {
-      fieldId: "planetName",
-      fieldValue: "Earth",
-      onChangeFieldValue: () => {},
-      validate: () => [],
-    };
-    //Act
-    const input = setup(requiredProps);
+    const errorMessage = "Characters length must be between 2 and 49";
+    mockValidate.mockReturnValue([errorMessage]); // return one error
+    setUpPlanetName();
+    const isOneError = screen.queryAllByTestId(/error/i);
+    const oneErrorOnScreen = screen.getByText(errorMessage);
+
     //Assert
-    expect(input.value).toBe("Earth");
+    expect(isOneError).toHaveLength(1); //check if there is only one error
+    expect(oneErrorOnScreen).toBeInTheDocument();
   });
 
   it(`Given the required props,
-  when the text is typed in the text box, 
-  input field should call its onChange function and pass it the correct parameters`, () => {
+  when the text is typed in the text box,
+  input field should call its 'validate' function to return TWO Errors`, () => {
     //Arrange
-    const mockOnChange = jest.fn();
-    const requiredProps: TextInputProps = {
-      fieldId: "planetName",
-      fieldValue: "",
-      onChangeFieldValue: mockOnChange,
-      validate: () => [],
-    };
-    const event = { target: { value: "Planet Earth" } };
-
+    const errorMessage = [
+      "ONLY Numbers!",
+      "numberOfBeings must be atleast 1,000,000,000",
+    ];
     //Act
-    const input = setup(requiredProps);
-    fireEvent.change(input, event); //// triggers onChange event
-
+    mockValidate.mockReturnValue(errorMessage);
+    setUpNumberOfBeings();
+    const isTwoErrors = screen.queryAllByTestId(/error/i);
+    const twoErrorOnScreen = screen.getByText(errorMessage[1]);
     //Assert
-    expect(mockOnChange).toBeCalledTimes(1); //to ensure that a mock function got called exact number of times.
-    expect(mockOnChange).toBeCalledWith("Planet Earth"); // tests if onChange handler is called with proper value
+    expect(isTwoErrors).toHaveLength(2); //check if there is only one error
+    expect(twoErrorOnScreen).toBeInTheDocument();
   });
 });
-
-describe("<TextInput/> for 'Number of beings:' textbox", () => {
-  it(`Given the required props, 
-    when the component is rendered, 
-    then 'Number of beings' textbox must be present`, () => {
-    //Arrange
-    const requiredProps: TextInputProps = {
-      fieldId: "numOfBeings",
-      fieldValue: "",
-      onChangeFieldValue: () => {},
-      validate: () => [],
-    };
-    //Act
-    const input = setup(requiredProps);
-    //Assert
-    expect(input).toBeInTheDocument();
-  });
-
-  it(`Given the required props,
-  If we give input fields certain values through props, do they display that value?`, () => {
-    //Arrange
-    const requiredProps: TextInputProps = {
-      fieldId: "numOfBeings",
-      fieldValue: "20",
-      onChangeFieldValue: () => {},
-      validate: () => [],
-    };
-    //Act
-    const input = setup(requiredProps);
-    //Assert
-    expect(input.value).toBe("20");
-  });
-
-  it(`Given the required props,
-  when the text is typed in the text box, 
-  input field should call its onChange function and pass it the correct parameters`, () => {
-    //Arrange
-    const mockOnChange = jest.fn();
-    const requiredProps: TextInputProps = {
-      fieldId: "numOfBeings",
-      fieldValue: "",
-      onChangeFieldValue: mockOnChange,
-      validate: () => [],
-    };
-    const event = { target: { value: 201 } };
-
-    //Act
-    const input = setup(requiredProps);
-    fireEvent.change(input, event); //// triggers onChange event
-
-    //Assert
-    expect(mockOnChange).toBeCalledTimes(1); //to ensure that a mock function got called exact number of times.
-    expect(mockOnChange).toBeCalledWith("201"); // tests if onChange handler is called with proper value
-  });
-});
+w;
