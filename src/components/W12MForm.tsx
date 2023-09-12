@@ -4,9 +4,9 @@ import TextInput from "./text-input";
 import SelectDropDown from "./select-dropdown";
 import TextArea from "./text-area";
 
-// import SpeciesName from "./species-name";
-// import PlanetName from "./planet-name";
-// import NumberOfBeings from "./number-of-beings";
+// import SpeciesName from "./deprecated_components/species-name";
+// import PlanetName from "./deprecated_components/planet-name";
+// import NumberOfBeings from "./deprecated_components/number-of-beings";
 
 import { validateSpeciesName } from "./validate/validate_species_name";
 import { validatePlanetName } from "./validate/validate_planet_name";
@@ -32,23 +32,6 @@ const W12MForm = () => {
   return (
     <section className="w12MForm">
       <W12MHeader />
-      {/* <SpeciesName
-        speciesName={speciesName}
-        onChangeSpeciesName={(value) => setSpeciesName(value)}
-        validate={validateSpeciesName}
-      />
-      <br></br>
-      <PlanetName
-        planetName={planetName}
-        onChangePlanetName={setPlanetName}
-        validate={validatePlanetName}
-      />
-      <br></br>
-      <NumberOfBeings
-        numOfBeings={numOfBeings}
-        onChangeNumOfBeings={(value) => setNumOfBeings(value)}
-        validate={validateNumOfBeings}
-      /> */}
       <TextInput
         fieldId="speciesName"
         fieldValue={speciesName}
@@ -58,19 +41,19 @@ const W12MForm = () => {
       <TextInput
         fieldId="planetName"
         fieldValue={planetName}
-        onChangeFieldValue={(value) => setPlanetName(value)}
+        onChangeFieldValue={setPlanetName}
         validate={validatePlanetName}
       />
       <TextInput
         fieldId="numOfBeings"
         fieldValue={numOfBeings}
-        onChangeFieldValue={(value) => setNumOfBeings(value)}
+        onChangeFieldValue={setNumOfBeings}
         validate={validateNumOfBeings}
       />
       <br></br>
       <SelectDropDown
         dropDown={dropDown}
-        onChangeDropDown={(value) => setDropDown(value)}
+        onChangeDropDown={setDropDown}
         validate={validateSelectDropDown}
       />
       <br></br>
