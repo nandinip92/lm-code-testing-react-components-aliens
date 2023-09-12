@@ -5,7 +5,7 @@ export const validateReasonForSparringTextArea: (
   const length = reasonForSparring.length;
   if (!(length > 17 && length < 153))
     errors.push(
-      "You are supposed to make you case with minimum of 17 and maximum of 153 characters"
+      "You are supposed to make your case with minimum of 17 and maximum of 153 characters"
     );
 
   return errors;
