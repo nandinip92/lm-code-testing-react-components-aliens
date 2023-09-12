@@ -52,19 +52,21 @@ describe("<SpeciesName/>", () => {
     expect(mockOnChange).toBeCalledWith("HumanBeings"); // tests if onChange handler is called with proper value
   });
 
+  //props for checking validate functions and below are the 3 tests
+
+  const mockValidateSpeciesName = jest.fn();
+  const requiredProps: SpeciesNameProps = {
+    speciesName: "Human",
+    onChangeSpeciesName: () => {},
+    validate: mockValidateSpeciesName,
+  };
   it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its 'validate' function to return empty [] when Species name is Valid`, () => {
-    ///Arrange
-    const mockValidateSpeciesName = jest.fn();
-    const requiredProps: SpeciesNameProps = {
-      speciesName: "Human",
-      onChangeSpeciesName: () => {},
-      validate: mockValidateSpeciesName,
-    };
+    //Act
+
     mockValidateSpeciesName.mockReturnValue([]);
 
-    //Act
     render(<SpeciesName {...requiredProps} />);
     //Checking for the non-existance of the element <p>
     const noErrorOnScreen = screen.queryByTestId(/error/i);
@@ -73,17 +75,11 @@ describe("<SpeciesName/>", () => {
   it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its 'validate' function to return ONE Error`, () => {
-    ///Arrange
-    const mockValidateSpeciesName = jest.fn();
-    const requiredProps: SpeciesNameProps = {
-      speciesName: "Human",
-      onChangeSpeciesName: () => {},
-      validate: mockValidateSpeciesName,
-    };
+    //Act
+
     mockValidateSpeciesName.mockReturnValue([
       "Characters length must be between 3 and 23",
     ]); // return one error
-    //Act
     render(<SpeciesName {...requiredProps} />);
 
     const isOneError = screen.queryAllByTestId(/error/i);
@@ -97,12 +93,7 @@ describe("<SpeciesName/>", () => {
   when the text is typed in the text box, 
   input field should call its 'validate' function to return TWO Errors`, () => {
     ///Arrange
-    const mockValidateSpeciesName = jest.fn();
-    const requiredProps: SpeciesNameProps = {
-      speciesName: "Human",
-      onChangeSpeciesName: () => {},
-      validate: mockValidateSpeciesName,
-    };
+
     mockValidateSpeciesName.mockReturnValue([
       "Characters length must be between 3 and 23",
       "No numbers or special characters allowed!",
