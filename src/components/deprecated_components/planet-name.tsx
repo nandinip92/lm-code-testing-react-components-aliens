@@ -1,5 +1,5 @@
 import React from "react";
-import ErrorMessage from "./error-messages";
+import ErrorMessage from "../error-messages";
 
 export interface PlanetNameProps {
   planetName: string;
