@@ -59,4 +59,38 @@ describe("<SelectDropDown/>", () => {
     expect(mockOnChange).toHaveBeenCalledTimes(2);
     expect(mockOnChange).toHaveBeenCalledWith("Not 4");
   });
+
+  const mockValidateDropDown = jest.fn();
+  const requiredProps: SelectDropDownProps = {
+    dropDown: "4",
+    onChangeDropDown: () => {},
+    validate: mockValidateDropDown,
+  };
+  it(`Given the required props,
+  when the text is typed in the text box, 
+  input field should call its 'validate' function to return empty [] for correct selection`, () => {
+    //Act
+    mockValidateDropDown.mockReturnValue([]);
+    render(<SelectDropDown {...requiredProps} />);
+    const noErrorOnScreen = screen.queryByTestId(/error/i);
+    expect(noErrorOnScreen).toBeNull();
+  });
+
+  it(`Given the required props,
+  when the text is typed in the text box,
+  input field should call its 'validate' function to return Error for wrong selection`, () => {
+    //Arrange
+    const errorMessage = "ERROR: 2 + 2 is Not 4";
+
+    //Act
+    mockValidateDropDown.mockReturnValue([errorMessage]); // return one error
+    render(<SelectDropDown {...requiredProps} />);
+
+    const isOneError = screen.queryAllByTestId(/error/i);
+    const oneErrorOnScreen = screen.getByText(errorMessage);
+
+    //Assert
+    expect(isOneError).toHaveLength(1); //check if there is only one error
+    expect(oneErrorOnScreen).toBeInTheDocument();
+  });
 });
