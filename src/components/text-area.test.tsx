@@ -60,4 +60,39 @@ describe("<TextArea/>", () => {
     expect(mockOnChange).toHaveBeenCalledTimes(1);
     expect(mockOnChange).toHaveBeenCalledWith(event.target.value);
   });
+
+  const mockValidateTextArea = jest.fn();
+  const requiredProps: TextAreaProps = {
+    reasonForSparring: "Hellooo I donot like you!",
+    onChangeReasonForSparring: () => {},
+    validate: mockValidateTextArea,
+  };
+  it(`Given the required props,
+  when the text is typed in the text box, 
+  input field should call its 'validate' function to return empty [] textArea requirements are met`, () => {
+    //Act
+    mockValidateTextArea.mockReturnValue([]);
+    render(<TextArea {...requiredProps} />);
+    const noErrorOnScreen = screen.queryByTestId(/error/i);
+    expect(noErrorOnScreen).toBeNull();
+  });
+
+  it(`Given the required props,
+  when the text is typed in the text box,
+  input field should call its 'validate' function to return Error extArea requirements are NOT met`, () => {
+    //Arrange
+    const errorMessage =
+      "You are supposed to make your case with minimum of 17 and maximum of 153 characters";
+
+    //Act
+    mockValidateTextArea.mockReturnValue([errorMessage]); // return one error
+    render(<TextArea {...requiredProps} />);
+
+    const isOneError = screen.queryAllByTestId(/error/i);
+    const oneErrorOnScreen = screen.getByText(errorMessage);
+
+    //Assert
+    expect(isOneError).toHaveLength(1); //check if there is only one error
+    expect(oneErrorOnScreen).toBeInTheDocument();
+  });
 });
