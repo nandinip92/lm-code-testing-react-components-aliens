@@ -6,13 +6,15 @@ import { v4 as uuidv4 } from "uuid";
 // }
 
 const ErrorMessage: React.FC<{ messages: Array<string> }> = ({ messages }) => {
+  const length = messages === undefined ? 0 : messages.length;
   return (
     <>
-      {messages.map((message) => (
-        <p key={uuidv4()} className="error">
-          {message}
-        </p>
-      ))}
+      {length > 0 &&
+        messages.map((message) => (
+          <p key={uuidv4()} className="error" data-testid="error">
+            {message}
+          </p>
+        ))}
     </>
   );
 };
