@@ -75,11 +75,10 @@ describe("<SpeciesName/>", () => {
   it(`Given the required props,
   when the text is typed in the text box, 
   input field should call its 'validate' function to return ONE Error`, () => {
+    //Assert
+    const errorMessage = "Characters length must be between 3 and 23";
     //Act
-
-    mockValidateSpeciesName.mockReturnValue([
-      "Characters length must be between 3 and 23",
-    ]); // return one error
+    mockValidateSpeciesName.mockReturnValue([errorMessage]); // return one error
     render(<SpeciesName {...requiredProps} />);
 
     const isOneError = screen.queryAllByTestId(/error/i);
@@ -93,18 +92,16 @@ describe("<SpeciesName/>", () => {
   when the text is typed in the text box, 
   input field should call its 'validate' function to return TWO Errors`, () => {
     ///Arrange
-
-    mockValidateSpeciesName.mockReturnValue([
+    const errorMessages = [
       "Characters length must be between 3 and 23",
       "No numbers or special characters allowed!",
-    ]); // // return two errors
+    ];
     //Act
+    mockValidateSpeciesName.mockReturnValue(errorMessages); // // return two errors
     render(<SpeciesName {...requiredProps} />);
 
     const isTwoErrors = screen.queryAllByTestId(/error/i);
-    const twoErrorOnScreen = screen.getByText(
-      "Characters length must be between 3 and 23"
-    );
+    const twoErrorOnScreen = screen.getByText(errorMessages[1]);
     expect(isTwoErrors).toHaveLength(2); //check if there is only one error
     expect(twoErrorOnScreen).toBeInTheDocument();
   });
