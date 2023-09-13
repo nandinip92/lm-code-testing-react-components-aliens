@@ -2,6 +2,7 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import TextInput, { TextInputProps } from "./text-input";
 import { Labels, labels } from "../data/inputfield-labels";
 
+/*
 describe("<TextInput/> for 'Species Name' textbox", () => {
   it(`Given the required props, 
     when the component is rendered, 
@@ -18,8 +19,8 @@ describe("<TextInput/> for 'Species Name' textbox", () => {
     expect(input).toBeInTheDocument();
   });
 });
+*/
 
-/*
 const mockOnChange = jest.fn();
 const mockValidate = jest.fn();
 
@@ -137,4 +138,3 @@ describe("<TextInput/> for textbox", () => {
     expect(twoErrorOnScreen).toBeInTheDocument();
   });
 });
-*/
