@@ -12,7 +12,7 @@ test("renders form element", () => {
   expect(container.firstChild).toHaveClass("w12MForm");
 });
 
-/*describe("Submit Button", () => {
+describe("Submit Button", () => {
   it(`Check if the submit button calls its handler function and pass the correct parameters`, async () => {
     const mockOnSubmit = jest.fn();
     render(<W12MForm />);
@@ -20,4 +20,4 @@ test("renders form element", () => {
     await userEvent.click(submitButton);
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
   });
-});*/
+});
