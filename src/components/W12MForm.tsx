@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import W12MHeader from "./W12MHeader";
 import TextInput from "./text-input";
 import SelectDropDown from "./select-dropdown";
@@ -14,7 +14,7 @@ import { validateNumOfBeings } from "./validate/validate_number_of_beings";
 import { validateSelectDropDown } from "./validate/validate_select_dropdown";
 import { validateReasonForSparringTextArea } from "./validate/validate_text_area";
 
-const W12MForm = () => {
+const W12MForm: React.FC<{ onSubmit?: () => void }> = ({ onSubmit }) => {
   const [speciesName, setSpeciesName] = useState("");
   const [planetName, setPlanetName] = useState("");
   const [numOfBeings, setNumOfBeings] = useState("");
@@ -22,6 +22,7 @@ const W12MForm = () => {
   const [reasonForSparring, setReasonForSparring] = useState("");
 
   const submitForm = () => {
+    onSubmit && onSubmit();
     console.log("speciesName: ", speciesName);
     console.log("planetName: ", planetName);
     console.log("numOfBeings: ", numOfBeings);
@@ -32,42 +33,44 @@ const W12MForm = () => {
   return (
     <section className="w12MForm">
       <W12MHeader />
-      <form onClick={submitForm}>
-        <TextInput
-          fieldId="speciesName"
-          fieldValue={speciesName}
-          onChangeFieldValue={setSpeciesName}
-          validate={validateSpeciesName}
-        />
-        <TextInput
-          fieldId="planetName"
-          fieldValue={planetName}
-          onChangeFieldValue={setPlanetName}
-          validate={validatePlanetName}
-        />
-        <TextInput
-          fieldId="numOfBeings"
-          fieldValue={numOfBeings}
-          onChangeFieldValue={setNumOfBeings}
-          validate={validateNumOfBeings}
-        />
-        <br></br>
-        <SelectDropDown
-          dropDown={dropDown}
-          onChangeDropDown={setDropDown}
-          validate={validateSelectDropDown}
-        />
-        <br></br>
-        <TextArea
-          reasonForSparring={reasonForSparring}
-          onChangeReasonForSparring={(value) => setReasonForSparring(value)}
-          validate={validateReasonForSparringTextArea}
-        />
 
-        <button type="submit" title="Submit">
-          Submit
-        </button>
-      </form>
+      <TextInput
+        fieldId="speciesName"
+        fieldValue={speciesName}
+        onChangeFieldValue={setSpeciesName}
+        validate={validateSpeciesName}
+      />
+      <TextInput
+        fieldId="planetName"
+        fieldValue={planetName}
+        onChangeFieldValue={(value) => setPlanetName(value)}
+        validate={validatePlanetName}
+      />
+      <TextInput
+        fieldId="numOfBeings"
+        fieldValue={numOfBeings}
+        onChangeFieldValue={(value) => setNumOfBeings(value)}
+        validate={validateNumOfBeings}
+      />
+      <br></br>
+      <SelectDropDown
+        dropDown={dropDown}
+        onChangeDropDown={(value) => setDropDown(value)}
+        validate={validateSelectDropDown}
+      />
+      <br></br>
+      <TextArea
+        reasonForSparring={reasonForSparring}
+        onChangeReasonForSparring={(value) => setReasonForSparring(value)}
+        validate={validateReasonForSparringTextArea}
+      />
+
+      <input
+        type="submit"
+        title="Submit"
+        value="Submit Form"
+        onClick={submitForm}
+      />
     </section>
   );
 };
