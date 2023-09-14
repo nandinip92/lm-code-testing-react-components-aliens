@@ -14,18 +14,27 @@ describe("<TextInput/> for 'Species Name' textbox", () => {
       validate: () => [],
     };
     render(<TextInput {...requiredProps} />);
-    const input = await screen.findByLabelText("Species Name: ");
+    const input = screen.getByLabelText("Species Name:");
     expect(input).toBeInTheDocument();
   });
 });
 
-/*
 const mockOnChange = jest.fn();
 const mockValidate = jest.fn();
 
-const setup = (requiredProps: TextInputProps) => {
+/*
+// setup using getByRole
+
+ const setup = (requiredProps: TextInputProps) => {
   render(<TextInput {...requiredProps} />);
   const input = screen.getByRole<HTMLInputElement>("textbox");
+  return input;
+};*/
+const setup = (requiredProps: TextInputProps) => {
+  const id = requiredProps.fieldId;
+  const textBoxLabel = labels[id as keyof Labels];
+  render(<TextInput {...requiredProps} />);
+  const input = screen.getByLabelText<HTMLInputElement>(textBoxLabel);
   return input;
 };
 
@@ -62,15 +71,34 @@ const setUpNumberOfBeings = () => {
   return input;
 };
 
-describe("<TextInput/> for textbox", () => {
+describe("<TextInput/> for checking if the Labels are displayed properly or not", () => {
   it(`Given the required props, 
     when the component is rendered, 
-    then 'Species Name' textbox must be present`, () => {
+    then 'Species Name' Label must be present`, async () => {
+    //Arrange and Act
+
     const input = setUpSpeciesName();
-    //Assert
     expect(input).toBeInTheDocument();
   });
+  it(`Given the required props, 
+    when the component is rendered, 
+    then 'Planet Name' Label must be present`, async () => {
+    //Arrange and Act
 
+    const input = setUpPlanetName();
+    expect(input).toBeInTheDocument();
+  });
+  it(`Given the required props, 
+    when the component is rendered, 
+    then 'Number Of Species' Label must be present`, async () => {
+    //Arrange and Act
+
+    const input = setUpNumberOfBeings();
+    expect(input).toBeInTheDocument();
+  });
+});
+
+describe("<TextInput/> for textbox", () => {
   it(`Given the required props,
   If we give input fields certain values through props, do they display that value?`, () => {
     //Act
@@ -137,4 +165,3 @@ describe("<TextInput/> for textbox", () => {
     expect(twoErrorOnScreen).toBeInTheDocument();
   });
 });
-*/

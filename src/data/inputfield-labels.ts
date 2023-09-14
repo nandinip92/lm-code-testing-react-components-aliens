@@ -5,7 +5,7 @@ export interface Labels {
 }
 
 export const labels: Labels = {
-  speciesName: "Species Name: ",
-  planetName: "Planet Name: ",
-  numOfBeings: "Number of beings: ",
+  speciesName: "Species Name:",
+  planetName: "Planet Name:",
+  numOfBeings: "Number of beings:",
 };
