@@ -2,26 +2,6 @@ import { render, screen, fireEvent } from "@testing-library/react";
 import TextInput, { TextInputProps } from "./text-input";
 import { Labels, labels } from "../data/inputfield-labels";
 
-describe("<TextInput/> for 'Species Name' textbox", () => {
-  it(`Given the required props, 
-    when the component is rendered, 
-    then 'Species Name' Label must be present`, async () => {
-    //Arrange
-    const requiredProps: TextInputProps = {
-      fieldId: "speciesName",
-      fieldValue: "",
-      onChangeFieldValue: () => {},
-      validate: () => [],
-    };
-    render(<TextInput {...requiredProps} />);
-    const input = screen.getByLabelText("Species Name:");
-    expect(input).toBeInTheDocument();
-  });
-});
-
-const mockOnChange = jest.fn();
-const mockValidate = jest.fn();
-
 /*
 // setup using getByRole
 
@@ -30,6 +10,9 @@ const mockValidate = jest.fn();
   const input = screen.getByRole<HTMLInputElement>("textbox");
   return input;
 };*/
+const mockOnChange = jest.fn();
+const mockValidate = jest.fn();
+
 const setup = (requiredProps: TextInputProps) => {
   const id = requiredProps.fieldId;
   const textBoxLabel = labels[id as keyof Labels];
