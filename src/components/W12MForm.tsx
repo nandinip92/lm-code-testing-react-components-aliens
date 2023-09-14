@@ -32,43 +32,42 @@ const W12MForm = () => {
   return (
     <section className="w12MForm">
       <W12MHeader />
-      <TextInput
-        fieldId="speciesName"
-        fieldValue={speciesName}
-        onChangeFieldValue={setSpeciesName}
-        validate={validateSpeciesName}
-      />
-      <TextInput
-        fieldId="planetName"
-        fieldValue={planetName}
-        onChangeFieldValue={setPlanetName}
-        validate={validatePlanetName}
-      />
-      <TextInput
-        fieldId="numOfBeings"
-        fieldValue={numOfBeings}
-        onChangeFieldValue={setNumOfBeings}
-        validate={validateNumOfBeings}
-      />
-      <br></br>
-      <SelectDropDown
-        dropDown={dropDown}
-        onChangeDropDown={setDropDown}
-        validate={validateSelectDropDown}
-      />
-      <br></br>
-      <TextArea
-        reasonForSparring={reasonForSparring}
-        onChangeReasonForSparring={(value) => setReasonForSparring(value)}
-        validate={validateReasonForSparringTextArea}
-      />
+      <form onSubmit={submitForm}>
+        <TextInput
+          fieldId="speciesName"
+          fieldValue={speciesName}
+          onChangeFieldValue={setSpeciesName}
+          validate={validateSpeciesName}
+        />
+        <TextInput
+          fieldId="planetName"
+          fieldValue={planetName}
+          onChangeFieldValue={setPlanetName}
+          validate={validatePlanetName}
+        />
+        <TextInput
+          fieldId="numOfBeings"
+          fieldValue={numOfBeings}
+          onChangeFieldValue={setNumOfBeings}
+          validate={validateNumOfBeings}
+        />
+        <br></br>
+        <SelectDropDown
+          dropDown={dropDown}
+          onChangeDropDown={setDropDown}
+          validate={validateSelectDropDown}
+        />
+        <br></br>
+        <TextArea
+          reasonForSparring={reasonForSparring}
+          onChangeReasonForSparring={(value) => setReasonForSparring(value)}
+          validate={validateReasonForSparringTextArea}
+        />
 
-      <input
-        type="submit"
-        title="Submit"
-        value="Submit Form"
-        onClick={submitForm}
-      />
+        <button type="submit" title="Submit">
+          Submit
+        </button>
+      </form>
     </section>
   );
 };

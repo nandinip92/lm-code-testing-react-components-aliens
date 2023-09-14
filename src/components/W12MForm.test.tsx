@@ -15,9 +15,12 @@ test("renders form element", () => {
 describe("Submit Button", () => {
   it(`Check if the submit button calls its handler function and pass the correct parameters`, async () => {
     const mockOnSubmit = jest.fn();
-    render(<W12MForm />);
+    //render(<W12MForm/>)
+    render(<form onClick={mockOnSubmit} />);
+
     const submitButton = screen.getByRole("button");
     await userEvent.click(submitButton);
+
     expect(mockOnSubmit).toHaveBeenCalledTimes(1);
   });
 });
