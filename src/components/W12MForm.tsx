@@ -32,7 +32,7 @@ const W12MForm = () => {
   return (
     <section className="w12MForm">
       <W12MHeader />
-      <form onSubmit={submitForm}>
+      <form onClick={submitForm}>
         <TextInput
           fieldId="speciesName"
           fieldValue={speciesName}
